@@ -19,6 +19,9 @@ const login = (user) => {
 
   userName.textContent = user.login
   modalAuth.style.display = 'none'
+
+  TestLogin(user.login)
+
 }
 
 const logout =( ) => {
@@ -29,7 +32,7 @@ const logout =( ) => {
     userName.textContent = ''
 
     localStorage.removeItem('user')
-
+    
 }
 
 buttonOut.addEventListener('click', () => {
@@ -56,7 +59,20 @@ logInForm.addEventListener('submit', (event) => {
      login(user)
 })
 
+function TestLogin(login){
+
+    if(/^[a-zA-Z1-9]+$/.test(login) === false)
+        {alert('В логине должны быть только латинские буквы'); return false;}
+    if(login.length < 4 || login.length > 20)
+        { alert('В логине должен быть от 4 до 20 символов'); return false;}
+    if(parseInt(login.substr(0, 1)))
+        {alert('Логине должен начинаться с буквы'); return false;}
+    
+     return true;
+}
+
 if(localStorage.getItem('user')){
     login(JSON.parse(localStorage.getItem('user')));
 }
+
 
