@@ -2,6 +2,8 @@ const menu= () => {
 
 const cardsMenu = document.querySelector('.cards-menu')
 
+const cartArray = localStorage.getItem('cart') ?
+JSON.parse(localStorage.getItem('cart')):[]
 
 const changeTitle = (restaraunt) =>
 {
@@ -14,6 +16,24 @@ const category = document.querySelector('.category')
  rating.textContent=restaraunt.stars
  price.textContent=restaraunt.price
  category.textContent=restaraunt.kitchen
+}
+
+const addToCart = (cartItem) => {
+
+    if(cartArray.some( (item) => item.id === cartItem.id))
+    {
+
+       cartArray.map((item =>{
+           if(item.id === cartItem.id){
+               item.count++
+             }
+
+        return item
+       }))
+    }
+    else {cartArray.push(cartItem)}
+    
+    localStorage.setItem('cart', JSON.stringify(cartArray))
 }
 
 
@@ -47,10 +67,18 @@ const renderItems = (data)=>{
                                 </div>
                             </div>      
         `
+
+        card.querySelector('.button-card-text').addEventListener('click', () => {
+
+            addToCart({ name, price, id, count:1 })
+
+        })
+
         cardsMenu.append(card)
   })
     
 }
+
 
 if (localStorage.getItem('restaraunt')){
 
