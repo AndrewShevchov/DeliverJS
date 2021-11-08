@@ -4,9 +4,14 @@ const sectionHeading = document.querySelector('.section-heading')
 const changeTitle = (restaraunt) =>
 {
 const restaurantTitle = document.querySelector('.restaurant-title') 
+const rating = document.querySelector('.rating') 
+const price = document.querySelector('.price') 
+const category = document.querySelector('.category') 
 
  restaurantTitle.textContent=restaraunt.name
- 
+ rating.textContent=restaraunt.stars
+ price.textContent=restaraunt.price
+ category.textContent=restaraunt.kitchen
 }
 
 
