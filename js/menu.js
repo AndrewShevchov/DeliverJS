@@ -1,5 +1,7 @@
+const menu= () => {
+
 const cardsMenu = document.querySelector('.cards-menu')
-const sectionHeading = document.querySelector('.section-heading') 
+
 
 const changeTitle = (restaraunt) =>
 {
@@ -68,7 +70,7 @@ fetch(`./db/${restaraunt.products}`)
 else{
     window.location.href = '/'
 }
+}
 
-
-
+menu()
 
