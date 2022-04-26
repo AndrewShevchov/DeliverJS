@@ -1,85 +1,81 @@
-const auth= () =>{
+const auth = () => {
 
-const buttonAuth = document.querySelector('.button-auth');
-const modalAuth = document.querySelector('.modal-auth');
-const closeAuth = document.querySelector('.close-auth');
-const logInForm = document.getElementById('logInForm');
-const inputLogin = document.getElementById('login');
-const inputPassword = document.getElementById('password');
-const buttonOut= document.querySelector('.button-out')
-const userName = document.querySelector('.user-name')
-const buttonCart = document.querySelector('.button-cart')
-
-
-console.log(userName);
-console.log(buttonOut);
+    const buttonAuth = document.querySelector('.button-auth');
+    const modalAuth = document.querySelector('.modal-auth');
+    const closeAuth = document.querySelector('.close-auth');
+    const logInForm = document.getElementById('logInForm');
+    const inputLogin = document.getElementById('login');
+    const inputPassword = document.getElementById('password');
+    const buttonOut = document.querySelector('.button-out')
+    const userName = document.querySelector('.user-name')
+    const buttonCart = document.querySelector('.button-cart')
 
 
-const login = (user) => {
-  buttonAuth.style.display='none'
+    console.log(userName);
+    console.log(buttonOut);
 
-  buttonOut.style.display ='flex'
-  userName.style.display='flex'
-  buttonCart.style.display='flex'
+    const TestLogin = (login) => {
 
-  userName.textContent = user.login
-  modalAuth.style.display = 'none'
+        if (/^[a-zA-Z1-9]+$/.test(login) === false) { alert('В логине должны быть только латинские буквы'); return false; }
+        if (login.length < 4 || login.length > 20) { alert('В логине должен быть от 4 до 20 символов'); return false; }
+        if (parseInt(login.substr(0, 1))) { alert('Логине должен начинаться с буквы'); return false; }
 
-  TestLogin(user.login)
-
-}
-
-const logout =( ) => {
-    buttonAuth.style.display='flex'
-
-    buttonOut.style.display ='none'
-    userName.style.display='none'
-    userName.textContent = ''
-    buttonCart.style.display='none'
-
-    localStorage.removeItem('user')
-    
-}
-
-buttonOut.addEventListener('click', () => {
-    logout()
-})
-
-buttonAuth.addEventListener('click', () => {
-    modalAuth.style.display = 'flex'
-})
-
-closeAuth.addEventListener('click', () => {
-    modalAuth.style.display = 'none'
-})
-
-logInForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-
-    const user = {
-        login: inputLogin.value,
-        password: inputPassword.value
+        return true;
     }
 
-    localStorage.setItem('user',JSON.stringify(user))
-     login(user)
-})
+    const login = (user) => {
+        buttonAuth.style.display = 'none'
 
-function TestLogin(login){
+        buttonOut.style.display = 'flex'
+        userName.style.display = 'flex'
+        buttonCart.style.display = 'flex'
 
-    if(/^[a-zA-Z1-9]+$/.test(login) === false)
-        {alert('В логине должны быть только латинские буквы'); return false;}
-    if(login.length < 4 || login.length > 20)
-        { alert('В логине должен быть от 4 до 20 символов'); return false;}
-    if(parseInt(login.substr(0, 1)))
-        {alert('Логине должен начинаться с буквы'); return false;}
-    
-     return true;
-}
+        userName.textContent = user.login
+        modalAuth.style.display = 'none'
 
-if(localStorage.getItem('user')){
-    login(JSON.parse(localStorage.getItem('user')));
-}
+        TestLogin(user.login)
+
+    }
+
+    const logout = () => {
+        buttonAuth.style.display = 'flex'
+
+        buttonOut.style.display = 'none'
+        userName.style.display = 'none'
+        userName.textContent = ''
+        buttonCart.style.display = 'none'
+
+        localStorage.removeItem('user')
+
+    }
+
+    buttonOut.addEventListener('click', () => {
+        logout()
+    })
+
+    buttonAuth.addEventListener('click', () => {
+        modalAuth.style.display = 'flex'
+    })
+
+    closeAuth.addEventListener('click', () => {
+        modalAuth.style.display = 'none'
+    })
+
+    logInForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const user = {
+            login: inputLogin.value,
+
+        }
+
+        localStorage.setItem('user', JSON.stringify(user))
+        login(user)
+    })
+
+    if (localStorage.getItem('user')) {
+        login(JSON.parse(localStorage.getItem('user')));
+    }
 }
 
 auth()

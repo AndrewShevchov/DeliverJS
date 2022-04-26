@@ -2,9 +2,6 @@ const menu= () => {
 
 const cardsMenu = document.querySelector('.cards-menu')
 
-const cartArray = localStorage.getItem('cart') ?
-JSON.parse(localStorage.getItem('cart')):[]
-
 const changeTitle = (restaraunt) =>
 {
 const restaurantTitle = document.querySelector('.restaurant-title') 
@@ -20,6 +17,11 @@ const category = document.querySelector('.category')
 
 const addToCart = (cartItem) => {
 
+    const totalPrice = document.querySelector('.modal-pricetag')
+
+    const cartArray = localStorage.getItem('cart') ?
+    JSON.parse(localStorage.getItem('cart')):[]
+
     if(cartArray.some( (item) => item.id === cartItem.id))
     {
 
@@ -32,10 +34,15 @@ const addToCart = (cartItem) => {
        }))
     }
     else {cartArray.push(cartItem)}
-    
+   
     localStorage.setItem('cart', JSON.stringify(cartArray))
-}
+ 
+    const  callcartprise = cartArray.reduce((sum, elem)=> (elem.price * elem.count) + sum, 0)
+    console.log(callcartprise+" ₽")
 
+    totalPrice.innerText = callcartprise +" ₽";
+
+}
 
 
 const renderItems = (data)=>{
@@ -73,10 +80,8 @@ const renderItems = (data)=>{
             addToCart({ name, price, id, count:1 })
 
         })
-
-        cardsMenu.append(card)
+        cardsMenu.append(card)  
   })
-    
 }
 
 
@@ -99,6 +104,7 @@ else{
     window.location.href = '/'
 }
 }
+
 
 menu()
 

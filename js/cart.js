@@ -1,5 +1,4 @@
-
-    const cart = () =>{
+const cart = () =>{
 
     const buttonCart = document.getElementById('cart-button');
     const modalCart = document.querySelector('.modal-cart')
@@ -12,9 +11,10 @@
         body.innerHTML=``
         localStorage.removeItem('cart')
         modalCart.classList.remove('is-open')
-        }
+    }
         
     const decremetCount = (id) =>{
+        const totalPrice = document.querySelector('.modal-pricetag')
         const cartArray = JSON.parse(localStorage.getItem('cart'))
 
         cartArray.map((item)=>{
@@ -26,12 +26,18 @@
         })
         
         localStorage.setItem('cart', JSON.stringify(cartArray))
+
+        const  callcartprise = cartArray.reduce((sum, elem)=> sum - (elem.price * elem.count), 0)
+       
+
+        totalPrice.innerText = Math.abs(callcartprise) +" ₽";
+
         renderItems(cartArray)
 
     }
 
     const incrementCount= (id) => {
-
+        const totalPrice = document.querySelector('.modal-pricetag')
         const cartArray = JSON.parse(localStorage.getItem('cart'))
 
         cartArray.map( (item) =>{
@@ -43,6 +49,12 @@
         })
         
         localStorage.setItem('cart', JSON.stringify(cartArray))
+
+        const  callcartprise = cartArray.reduce((sum, elem)=> (elem.price * elem.count) + sum, 0)
+       
+
+        totalPrice.innerText = callcartprise +" ₽";
+
         renderItems(cartArray)
 
     }
