@@ -11,6 +11,8 @@
 	<script src="./js/auth.js" defer></script>
 	<script src="./js/partners.js" defer></script>
 	<script src="./js/cart.js" defer></script>
+	<script src="./js/search.js"></script>
+	
 
 </head>
 
@@ -25,18 +27,12 @@
 			</label>
 			<div class="buttons">
 				<span class="user-name"></span>
-				<button class="button button-primary button-auth">
-					<span class="button-auth-svg"></span>
-					<span class="button-text">Войти</span>
-				</button>
+	
 				<button class="button button-cart" id="cart-button">
 					<span class="button-cart-svg"></span>
 					<span class="button-text">Корзина</span>
 				</button>
-				<button class="button button-primary button-out">
-					<span class="button-text">Выйти</span>
-					<span class="button-out-svg"></span>
-				</button>
+				
 			</div>
 		</header>
 	</div>
@@ -78,8 +74,8 @@
 					</label>
 				</div>
 				<div class="cards cards-restaurants">
-					
-					
+
+
 				</div>
 				<!-- /.cards -->
 			</section>
@@ -116,50 +112,29 @@
 			</div>
 			<!-- /.modal-header -->
 			<div class="modal-body">
-				<div class="food-row">
-					<span class="food-name">Ролл угорь стандарт</span>
-					<strong class="food-price">250 ₽</strong>
-					<div class="food-counter">
-						<button class="counter-button">-</button>
-						<span class="counter">1</span>
-						<button class="counter-button">+</button>
-					</div>
-				</div>
-				<!-- /.foods-row -->
-				<div class="food-row">
-					<span class="food-name">Ролл угорь стандарт</span>
-					<strong class="food-price">250 ₽</strong>
-					<div class="food-counter">
-						<button class="counter-button">-</button>
-						<span class="counter">1</span>
-						<button class="counter-button">+</button>
-					</div>
-				</div>
-				<!-- /.foods-row -->
-				<div class="food-row">
-					<span class="food-name">Ролл угорь стандарт</span>
-					<strong class="food-price">250 ₽</strong>
-					<div class="food-counter">
-						<button class="counter-button">-</button>
-						<span class="counter">1</span>
-						<button class="counter-button">+</button>
-					</div>
-				</div>
-				<!-- /.foods-row -->
-				<div class="food-row">
-					<span class="food-name">Ролл угорь стандарт</span>
-					<strong class="food-price">250 ₽</strong>
-					<div class="food-counter">
-						<button class="counter-button">-</button>
-						<span class="counter">1</span>
-						<button class="counter-button">+</button>
-					</div>
-				</div>
 				<!-- /.foods-row -->
 			</div>
 			<!-- /.modal-body -->
+			<form action="#" class="order-modal__form order">
+				<input type="hidden" name="theme" value="Обратный звонок">
+				<input type="hidden" name="admin_email[]" value="maxgraph23@gmail.com">
+				<input type="hidden" name="form_subject" value="Заявка с сайта Сайт">
+				<label class="order__label">
+					<span class="order__text">Ваше имя</span>
+					<input type="text" name="Имя" class="order__input">
+				</label>
+				<label class="order__label">
+					<span class="order__text">Телефон</span>
+					<input type="tel" name="Телефон" class="order__input" placeholder="+7 (___)___-__-__">
+				</label>
+				<label class="order__label">
+					<span class="order__text">Адрес</span>
+					<input type="text" name="Адрес" class="order__input">
+				</label>
+			</form>
 			<div class="modal-footer">
-				<span class="modal-pricetag">1250 ₽</span>
+				<span class="modal-pricetag">0 ₽</span>
+				<!-- /.foooooooooorrrrrmmmmm -->
 				<div class="footer-buttons">
 					<button class="button button-primary">Оформить заказ</button>
 					<button class="button clear-cart">Отмена</button>
@@ -170,28 +145,6 @@
 		<!-- /.modal-dialog -->
 	</div>
 
-	<div class="modal-auth">
-		<div class="modal-dialog modal-dialog-auth">
-			<button class="close-auth">&times;</button>
-			<form id="logInForm" >
-				<fieldset class="modal-body">
-					<legend class="modal-title">Авторизация</legend>
-					<label class="label-auth">
-						<span>Логин</span>
-						<input id="login" type="text">
-					</label>
-				</fieldset>
-				<!-- /.modal-body -->
-				<div class="modal-footer">
-					<div class="footer-buttons">
-						<button class="button button-primary button-login" type="submit">Войти</button>
-					</div>
-				</div>
-			</form>
-			<!-- /.modal-footer -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
 </body>
 
 </html>

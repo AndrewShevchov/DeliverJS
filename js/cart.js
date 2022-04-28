@@ -1,75 +1,81 @@
-const cart = () =>{
+const cart = () => {
 
     const buttonCart = document.getElementById('cart-button');
     const modalCart = document.querySelector('.modal-cart')
     const close = modalCart.querySelector('.close')
     const body = modalCart.querySelector('.modal-body')
-    const buttonSend =  modalCart.querySelector('.button-primary')
+    const buttonSend = modalCart.querySelector('.button-primary')
 
 
-    const resetCart= () => {
-        body.innerHTML=``
+    const resetCart = () => {
+        body.innerHTML = ``
         localStorage.removeItem('cart')
         modalCart.classList.remove('is-open')
     }
-        
-    const decremetCount = (id) =>{
+
+    const decremetCount = (id) => {
         const totalPrice = document.querySelector('.modal-pricetag')
         const cartArray = JSON.parse(localStorage.getItem('cart'))
 
-        cartArray.map((item)=>{
-            if (item.id===id){
+        cartArray.map((item) => {
+            if (item.id === id) {
                 item.count = item.count > 0 ? item.count - 1 : 0
             }
-             
+            if(item.count === 0 ){
+                var myIndex = cartArray.indexOf(item);
+                cartArray.splice(myIndex, 1);
+            }
+
             return item
         })
-        
+
+
+
         localStorage.setItem('cart', JSON.stringify(cartArray))
 
-        const  callcartprise = cartArray.reduce((sum, elem)=> sum - (elem.price * elem.count), 0)
-       
+        const callcartprise = cartArray.reduce((sum, elem) => sum - (elem.price * elem.count), 0)
 
-        totalPrice.innerText = Math.abs(callcartprise) +" ₽";
+
+        totalPrice.innerText = Math.abs(callcartprise) + " ₽";
 
         renderItems(cartArray)
 
     }
 
-    const incrementCount= (id) => {
+    const incrementCount = (id) => {
         const totalPrice = document.querySelector('.modal-pricetag')
         const cartArray = JSON.parse(localStorage.getItem('cart'))
 
-        cartArray.map( (item) =>{
-            
+        cartArray.map((item) => {
+
             if (item.id === id) {
                 item.count++
             }
             return item
         })
-        
+
         localStorage.setItem('cart', JSON.stringify(cartArray))
 
-        const  callcartprise = cartArray.reduce((sum, elem)=> (elem.price * elem.count) + sum, 0)
-       
+        const callcartprise = cartArray.reduce((sum, elem) => (elem.price * elem.count) + sum, 0)
 
-        totalPrice.innerText = callcartprise +" ₽";
+
+        totalPrice.innerText = callcartprise + " ₽";
 
         renderItems(cartArray)
 
     }
 
-    const renderItems = (data)=>{
-        body.innerHTML=``
+    const renderItems = (data) => {
+        body.innerHTML = ``
 
-        data.forEach ( ({count,id,name, price}) => {
+        data.forEach(({ count, id, name, price }) => {
 
-            
+
             const cartElement = document.createElement('div')
 
             cartElement.classList.add('food-row')
 
-            cartElement.innerHTML =`
+            cartElement.innerHTML = `
 
             
 				<span class="food-name">${name}</span>
@@ -83,37 +89,35 @@ const cart = () =>{
             `
             body.append(cartElement)
         })
-        
+
     }
 
 
-    body.addEventListener('click',(element) => {
+    body.addEventListener('click', (element) => {
         element.preventDefault()
 
-       if(element.target.classList.contains('btn-inc'))
-       {
-        incrementCount(element.target.dataset.index)
-       }
-       else if(element.target.classList.contains('btn-dec'))
-       {
-        decremetCount(element.target.dataset.index)
-       }
+        if (element.target.classList.contains('btn-inc')) {
+            incrementCount(element.target.dataset.index)
+        }
+        else if (element.target.classList.contains('btn-dec')) {
+            decremetCount(element.target.dataset.index)
+        }
     })
 
     buttonSend.addEventListener('click', () => {
 
         const cartArray = localStorage.getItem('cart')
 
-        fetch(`https://jsonplaceholder.typicode.com/posts`,{
+        fetch(`https://jsonplaceholder.typicode.com/posts`, {
             method: 'POST',
             body: cartArray
         })
-        .then(response=> {
-            if(response.ok){
-                resetCart()
-            }
+            .then(response => {
+                if (response.ok) {
+                    resetCart()
+                }
 
-        })
+            })
 
     })
 
@@ -121,8 +125,7 @@ const cart = () =>{
 
         console.log();
 
-        if(localStorage.getItem('cart'))
-        {
+        if (localStorage.getItem('cart')) {
             renderItems(JSON.parse(localStorage.getItem('cart')))
         }
 
@@ -132,12 +135,12 @@ const cart = () =>{
 
 
     close.addEventListener('click', () => {
-        
+
 
         modalCart.classList.remove('is-open')
-        
-        })
 
-    }
+    })
 
-    cart()
+}
+
+cart()

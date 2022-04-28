@@ -67,7 +67,7 @@ button {
 .button {
     display: flex;
     align-items: center;
-    padding: 8px 16px;
+    height: 50px;
     background: #ffffff;
     border: 1px solid #d9d9d9;
     box-sizing: border-box;
@@ -145,7 +145,7 @@ button {
 }
 
 .button-cart {
-    display: none;
+    display: flex !important;
     margin: 0 5px;
 }
 
@@ -437,6 +437,7 @@ button {
     border-radius: 5px;
     margin: auto;
     padding: 40px 45px;
+   
 }
 
 .modal-dialog-auth {
@@ -485,6 +486,8 @@ button {
 
 .modal-body {
     margin-bottom: 22px;
+    overflow: auto;
+    height: 200px;
 }
 
 .food-row {
@@ -568,6 +571,22 @@ button {
     line-height: 23px;
 }
 
+.order-modal__form{
+    display: flex;
+    justify-content:center;
+}
+.order__label{
+padding: 10px;
+}
+.order__input{
+    height: 30px;
+    background: #f0efef;
+    border-width:2px ;
+}
+.order__text{
+font-size: large;
+font-weight: 600;
+}
 @media (max-width: 1366px) {
     .container {
         max-width: 960px;
@@ -607,8 +626,6 @@ button {
     .container {
         max-width: 750px;
     }
-
-
 
     .pizza {
         padding: 50px;
@@ -702,6 +719,11 @@ button {
     .promo-text {
         margin-top: 0;
     }
+
+    .order__input{
+        width: 150px;
+    }
+    
 }
 
 @media (max-width: 578px) {
@@ -772,6 +794,9 @@ button {
     .social-links {
         order: 2;
     }
+    .order__input{
+        width: 130px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -837,4 +862,16 @@ button {
     .footer-link:not(:last-child) {
         margin-right: 0;
     }
+    .order__input{
+        width: 100px;
+    }
+
+    .food-row{
+        font-size: 14px;
+        height: 100px;
+    }
+    .food-price{
+        margin-right: 5px;
+        margin-left: 5px;
+    } 
 }

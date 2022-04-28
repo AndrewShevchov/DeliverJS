@@ -41,8 +41,9 @@ const addToCart = (cartItem) => {
     console.log(callcartprise+" ₽")
 
     totalPrice.innerText = callcartprise +" ₽";
-
 }
+
+
 
 
 const renderItems = (data)=>{
